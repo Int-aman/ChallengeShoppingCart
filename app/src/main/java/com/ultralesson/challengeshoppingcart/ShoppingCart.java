@@ -21,4 +21,8 @@ public class ShoppingCart {
     public void setItems(ArrayList<Items> items) {
         this.items = items;
     }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
 }

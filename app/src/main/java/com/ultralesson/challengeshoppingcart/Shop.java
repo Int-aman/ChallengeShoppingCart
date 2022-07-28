@@ -8,10 +8,9 @@ public class Shop {
     public void shopTransaction(Consumer consumer){
         double amountPayable = 0;
         int  milkQuantity = 0;
-        ShoppingCart cart = new ShoppingCart();
         ArrayList<Items> items = new ArrayList<>();
-        cart = consumer.getCart();
-        items = cart.getItems();
+        ShoppingCart cart = consumer.getCart();
+        items = cart.getItems(); // Getting items in the cart
 
         for(Items item: items){
             amountPayable += item.getItemPrice() * item.getQuantity();
@@ -20,16 +19,21 @@ public class Shop {
                 milkQuantity += milkQuantity/2;
                 item.setQuantity(milkQuantity);
             }
-        }
+        } // Check if there are more than 2 items (2 milk products)
+            // Apply offer
 
         if(consumer.getEwallet().getBalance() >= amountPayable && amountPayable >= 100){
             amountPayable -= 0.05*amountPayable;
         }
 
+        // Check if discount is applicable
+        // Apply discount
+
         System.out.println("Total amount payable: "+amountPayable);
-        printItemList(items);
+        printItemList(items); // Display total items
         consumer.getEwallet().setBalance(consumer.getEwallet().getBalance()-amountPayable);
         System.out.println("Remaining E-walllet Balance :" + (consumer.getEwallet().getBalance()));
+        // Display remaining wallet balance
 
     }
 
